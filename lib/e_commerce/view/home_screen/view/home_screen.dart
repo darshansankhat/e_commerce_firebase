@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                NotificationHelper.helper.timeNotification();
+                NotificationHelper.helper.bigPictureNotification();
               },
               icon: Icon(
                 Icons.search,
