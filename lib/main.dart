@@ -1,4 +1,5 @@
 import 'package:e_commerce_firebase/e_commerce/view/add_product_screen/view/add_products_screen.dart';
+import 'package:e_commerce_firebase/e_commerce/view/helper_class/firebase_helper.dart';
 import 'package:e_commerce_firebase/e_commerce/view/helper_class/notification_helper.dart';
 import 'package:e_commerce_firebase/e_commerce/view/home_screen/view/home_screen.dart';
 import 'package:e_commerce_firebase/e_commerce/view/login_screens/view/sign_in_screen.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
   );
 
   NotificationHelper.helper.initNotification();
+  FirebaseHelper.firebaseHelper.initFirebaseNotification();
 
   runApp(
     Sizer(

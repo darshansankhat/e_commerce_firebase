@@ -114,4 +114,15 @@ class NotificationHelper {
     await notificationsPlugin.show(
         4, "Picture Add", "Picture Add Successfully", notificationDetails);
   }
+
+  Future<void> showFireSimpleNotification(title,body) async {
+    AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+        "5", "Fire Notification",
+        priority: Priority.high, importance: Importance.high);
+    DarwinNotificationDetails iosDetails = DarwinNotificationDetails();
+    NotificationDetails notificationDetails =
+    NotificationDetails(android: androidDetails, iOS: iosDetails);
+    await notificationsPlugin.show(
+        5, "$title", "$body", notificationDetails);
+  }
 }

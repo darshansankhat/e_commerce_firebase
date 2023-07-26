@@ -256,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.deepOrange,
                     boxShadow: [
-                      BoxShadow(color: Colors.deepOrange, blurRadius: 5)
+                      BoxShadow(color: Colors.deepOrange, blurRadius: 3)
                     ]),
                 child: Icon(Icons.add, size: 30, color: Colors.white),
               ),
