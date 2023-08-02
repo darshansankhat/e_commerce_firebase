@@ -16,6 +16,7 @@ class AddProduct extends StatefulWidget {
 
 class _AddProductState extends State<AddProduct> {
   TextEditingController txtname = TextEditingController();
+  TextEditingController txtimage= TextEditingController();
   TextEditingController txtprice = TextEditingController();
   TextEditingController txtdesc = TextEditingController();
   TextEditingController txtcategory = TextEditingController();
@@ -52,31 +53,22 @@ class _AddProductState extends State<AddProduct> {
                 buildTextFormField("Name", txtname,1),
                 //image
                 SizedBox(height: 2.h,),
-                Container(
-                  height: 25.h,
-                  width: 100.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.deepOrange),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text("Add Image"),
-                ),
+                buildTextFormField("Add Image", txtimage, 1),
                 //price
                 SizedBox(
                   height: 2.h,
                 ),
                 buildTextFormField("Price", txtprice,1),
-                //desc
-                SizedBox(
-                  height: 2.h,
-                ),
-                buildTextFormField("Description", txtdesc,4),
                 //category
                 SizedBox(
                   height: 2.h,
                 ),
                 buildTextFormField("Category", txtcategory,1),
+                //desc
+                SizedBox(
+                  height: 2.h,
+                ),
+                buildTextFormField("Description", txtdesc,4),
               ],
             ),
           ),
@@ -87,7 +79,7 @@ class _AddProductState extends State<AddProduct> {
             onTap: () {
               FirebaseHelper.firebaseHelper.insertData(ProductModel(
                 name: txtname.text,
-                img: "https://luxurysales.in/cdn/shop/products/2020_06_17_11_51_IMG_3662_grande.jpg",
+                img: txtimage.text,
                 price: txtprice.text,
                 desc: txtdesc.text,
                 cate: txtcategory.text,

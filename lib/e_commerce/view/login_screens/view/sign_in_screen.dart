@@ -107,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       String msj = await FirebaseHelper.firebaseHelper.signInEmail(txtemail.text, txtpassword.text);
                       if(msj=="SignIn Successfully")
                       {
-                        Get.toNamed("home")!.then((value) {
+                        Get.offAllNamed("home")!.then((value) {
                           txtemail.clear();
                           txtpassword.clear();
                         },);
@@ -132,67 +132,67 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                   ),
-                  //other
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text("or sign in with social account"),
-                  SizedBox(
-                    height: 1.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      //google
-                      FloatingActionButton(
-                        heroTag: "1",
-                        onPressed: () async {
-                          await FirebaseHelper.firebaseHelper.signInGoogle();
-                          Get.toNamed("home");
-                        },
-                        child: Image.asset(
-                          "assets/images/g.png",
-                          height: 30,
-                          width: 30,
-                        ),
-                        backgroundColor: Colors.white,
-                      ),
-                      //facebook
-                      FloatingActionButton(
-                        onPressed: () {},
-                        heroTag: "2",
-                        child: Image.asset(
-                          "assets/images/f.png",
-                          height: 30,
-                          width: 30,
-                        ),
-                        backgroundColor: Colors.white,
-                      ),
-                      //guest
-                      FloatingActionButton(
-                        onPressed: () async {
-                          String msj = await FirebaseHelper.firebaseHelper.guestSignIn();
-                          if(msj == "SignIn Successfully")
-                          {
-                            Get.snackbar("", "$msj",colorText: Colors.black,backgroundColor: Colors.blue.shade50);
-                            Get.toNamed("home");
-                          }
-                          else
-                          {
-                            Get.snackbar("", "$msj",colorText: Colors.black,backgroundColor: Colors.blue.shade50);
-                          }
-                        },
-                        heroTag: "3",
-                        child: Icon(
-                          Icons.person,
-                          size: 30,
-                        ),
-                        backgroundColor: Colors.white,
-                      ),
-                    ],
-                  ),
+                  // //other
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
+                  // Text("or sign in with social account"),
+                  // SizedBox(
+                  //   height: 1.h,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //     //google
+                  //     FloatingActionButton(
+                  //       heroTag: "1",
+                  //       onPressed: () async {
+                  //         await FirebaseHelper.firebaseHelper.signInGoogle();
+                  //         Get.toNamed("home");
+                  //       },
+                  //       child: Image.asset(
+                  //         "assets/images/g.png",
+                  //         height: 30,
+                  //         width: 30,
+                  //       ),
+                  //       backgroundColor: Colors.white,
+                  //     ),
+                  //     //facebook
+                  //     FloatingActionButton(
+                  //       onPressed: () {},
+                  //       heroTag: "2",
+                  //       child: Image.asset(
+                  //         "assets/images/f.png",
+                  //         height: 30,
+                  //         width: 30,
+                  //       ),
+                  //       backgroundColor: Colors.white,
+                  //     ),
+                  //     //guest
+                  //     FloatingActionButton(
+                  //       onPressed: () async {
+                  //         String msj = await FirebaseHelper.firebaseHelper.guestSignIn();
+                  //         if(msj == "SignIn Successfully")
+                  //         {
+                  //           Get.snackbar("", "$msj",colorText: Colors.black,backgroundColor: Colors.blue.shade50);
+                  //           Get.toNamed("home");
+                  //         }
+                  //         else
+                  //         {
+                  //           Get.snackbar("", "$msj",colorText: Colors.black,backgroundColor: Colors.blue.shade50);
+                  //         }
+                  //       },
+                  //       heroTag: "3",
+                  //       child: Icon(
+                  //         Icons.person,
+                  //         size: 30,
+                  //       ),
+                  //       backgroundColor: Colors.white,
+                  //     ),
+                  //   ],
+                  // ),
                   //sign up
-                  SizedBox(height: 8.h,),
+                  SizedBox(height: 27.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

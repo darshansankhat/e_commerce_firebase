@@ -9,7 +9,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:sizer/sizer.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -32,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
+          title: const Text(
             "Shopify",
             style: TextStyle(fontSize: 22, color: Colors.black),
           ),
@@ -41,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 NotificationHelper.helper.bigPictureNotification();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
                 size: 25,
               ),
@@ -85,10 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   print(productList[index].id);
                   return GestureDetector(
                     onDoubleTap: () {
-                      Get.toNamed('update',arguments: productList[index]);
+                      Get.toNamed('update', arguments: productList[index]);
                     },
                     child: Container(
-                      height: 15.h,
                       width: 100.w,
                       color: Colors.white,
                       child: Padding(
@@ -112,18 +110,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     Text(
                                       "${productList[index].name}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 20, color: Colors.black),
                                     ),
                                     Text(
                                       "₹ ${productList[index].price}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 18, color: Colors.green),
                                     ),
                                     Text(
                                       // overflow: TextOverflow.ellipsis,
                                       "${productList[index].cate}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 15,
                                           color: Colors.deepOrange),
                                     ),
@@ -162,19 +160,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                     onTap: () {
                                       FirebaseHelper.firebaseHelper
                                           .deleteData(productList[index].id);
-                                      NotificationHelper.helper.showSoundNotification();
+                                      NotificationHelper.helper
+                                          .showSoundNotification();
                                     },
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.delete,
                                           color: Colors.red,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
-                                        Text("Delete")
+                                        const Text("Delete")
                                       ],
                                     ),
                                   ),
@@ -189,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               );
             }
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           },
         ),
         drawer: Drawer(
@@ -200,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 //image
                 controller.userDetails!['photo'] == null
-                    ? CircleAvatar(
+                    ? const CircleAvatar(
                         radius: 55,
                         backgroundImage: AssetImage("assets/images/p.png"),
                       )
@@ -209,8 +208,33 @@ class _HomeScreenState extends State<HomeScreen> {
                         backgroundImage:
                             NetworkImage("${controller.userDetails!['photo']}"),
                       ),
+                // pickimage
+                controller.userDetails!['photo'] == null
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.camera,
+                              size: 25,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 2.w,
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.photo,
+                              size: 25,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
                 // detail
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 buildListTile(Icons.person,
@@ -224,18 +248,45 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 30.h,
                 ),
                 ElevatedButton(
-                  onPressed: () async {
-                    String msj = await FirebaseHelper.firebaseHelper.signOut();
-                    if (msj == "SignOut Successfully") {
-                      Get.back();
-                      Get.back();
-                    } else {
-                      Get.snackbar("", "$msj",
-                          colorText: Colors.black,
-                          backgroundColor: Colors.blue.shade50);
-                    }
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CircleAvatar(radius: 35,child: Icon(Icons.admin_panel_settings_outlined)),
+                              const Text(
+                                "Ecommerce Admin App !",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
+                              ),
+                              const Text(
+                                "Are you sure to signout\n the admine app",
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black38),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 10,),
+                             ElevatedButton(onPressed: () async {
+                              String msg = await FirebaseHelper.firebaseHelper.signOut();
+                              if(msg=="SignOut Successfully")
+                                {
+                                  Get.offAllNamed("/");
+                                }
+                              else
+                                {
+                                  Get.snackbar("", "$msg",colorText: Colors.black,backgroundColor: Colors.blue.shade50);
+                                }
+                             }, child: const Text("Sign Out"),),
+                            ],
+                          ),
+                        );
+                      },
+                    );
                   },
-                  child: Text("Sign Out"),
+                  child: const Text("Sign Out"),
                 ),
               ],
             ),
@@ -251,14 +302,14 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 height: 6.h,
                 width: 25.w,
-                margin: EdgeInsets.all(15),
+                margin: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.deepOrange,
                     boxShadow: [
-                      BoxShadow(color: Colors.deepOrange, blurRadius: 3)
+                      const BoxShadow(color: Colors.deepOrange, blurRadius: 3)
                     ]),
-                child: Icon(Icons.add, size: 30, color: Colors.white),
+                child: const Icon(Icons.add, size: 30, color: Colors.white),
               ),
             ),
           ],
@@ -274,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       title: Text(
         "$data",
-        style: TextStyle(fontSize: 15, color: Colors.black),
+        style: const TextStyle(fontSize: 15, color: Colors.black),
       ),
     );
   }
@@ -285,10 +336,10 @@ class _HomeScreenState extends State<HomeScreen> {
       maxLines: max,
       decoration: InputDecoration(
         border: InputBorder.none,
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.deepOrange),
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.deepOrange, width: 2),
         ),
         label: Text("Product $name"),

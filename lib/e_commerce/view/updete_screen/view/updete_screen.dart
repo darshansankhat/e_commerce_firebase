@@ -15,6 +15,7 @@ class UpdeteProduct extends StatefulWidget {
 
 class _UpdeteProductState extends State<UpdeteProduct> {
   TextEditingController txtname = TextEditingController();
+  TextEditingController txtimage = TextEditingController();
   TextEditingController txtprice = TextEditingController();
   TextEditingController txtdesc = TextEditingController();
   TextEditingController txtcategory = TextEditingController();
@@ -76,21 +77,24 @@ class _UpdeteProductState extends State<UpdeteProduct> {
                   alignment: Alignment.center,
                   child: Image.network(image!),
                 ),
+                //image
+                SizedBox(height: 2.h,),
+                buildTextFormField("Add Image", txtimage, 1),
                 //price
                 SizedBox(
                   height: 2.h,
                 ),
                 buildTextFormField("Price", txtprice,1),
-                //desc
-                SizedBox(
-                  height: 2.h,
-                ),
-                buildTextFormField("Description", txtdesc,4),
                 //category
                 SizedBox(
                   height: 2.h,
                 ),
                 buildTextFormField("Category", txtcategory,1),
+                //desc
+                SizedBox(
+                  height: 2.h,
+                ),
+                buildTextFormField("Description", txtdesc,4),
               ],
             ),
           ),
@@ -101,13 +105,14 @@ class _UpdeteProductState extends State<UpdeteProduct> {
             onTap: () {
              ProductModel model= ProductModel(
                 name: txtname.text,
-                img: "https://luxurysales.in/cdn/shop/products/2020_06_17_11_51_IMG_3662_grande.jpg",
+                img: txtimage.text,
                 price: txtprice.text,
                 desc: txtdesc.text,
                 cate: txtcategory.text,
                 id: id,
               );
               FirebaseHelper.firebaseHelper.updateData(model);
+              Get.back();
             },
             child: Container(
               height: 6.h,
